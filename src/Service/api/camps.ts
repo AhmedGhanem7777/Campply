@@ -1,7 +1,7 @@
 // src/Service/api/camps.ts
 import { api } from "../../lib/api";
 
-const API_BASE = (import.meta as any)?.env?.VITE_API_BASE_URL || "https://camply.runasp.net";
+const API_BASE = (import.meta as any)?.env?.VITE_API_BASE_URL || "https://omancamps.com";
 
 export type CampImage = {
   id?: number;

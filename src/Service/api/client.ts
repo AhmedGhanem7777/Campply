@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = ("https://camply.runasp.net").replace(/\/$/, "");
+const BASE_URL = ("https://omancamps.com").replace(/\/$/, "");
 
 export const api = axios.create({
   baseURL: BASE_URL,

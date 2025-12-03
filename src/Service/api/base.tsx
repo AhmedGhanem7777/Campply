@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://camply.runasp.net",
+  baseURL: "https://omancamps.com",
   headers: {
     "Content-Type": "application/json",
   },

@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: (import.meta as any)?.env?.VITE_API_BASE_URL || "https://camply.runasp.net",
+  baseURL: (import.meta as any)?.env?.VITE_API_BASE_URL || "https://omancamps.com",
   headers: { "Content-Type": "application/json" },
   timeout: 20000,
 });

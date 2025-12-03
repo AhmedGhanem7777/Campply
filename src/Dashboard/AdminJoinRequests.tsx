@@ -91,7 +91,7 @@ async function readErrorMessage(res: Response) {
   }
 }
 
-export default function AdminJoinRequests({ apiBase = "https://camply.runasp.net", authToken = "" }: { apiBase?: string; authToken?: string; }) {
+export default function AdminJoinRequests({ apiBase = "https://omancamps.com", authToken = "" }: { apiBase?: string; authToken?: string; }) {
   // UI state
   const [list, setList] = useState<CampRequestListItem[]>([]);
   const [totalItems, setTotalItems] = useState(0);

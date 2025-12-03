@@ -78,7 +78,7 @@ function ToggleSwitch({
 
 // API client
 const api = axios.create({
-  baseURL: (import.meta as any)?.env?.VITE_API_BASE_URL || "https://camply.runasp.net",
+  baseURL: (import.meta as any)?.env?.VITE_API_BASE_URL || "https://www.omancamps.com",
   timeout: 20000,
   headers: { "Content-Type": "application/json" },
 });

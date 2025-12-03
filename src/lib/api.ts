@@ -1,7 +1,7 @@
 // src/lib/api.ts
 import axios from "axios";
 
-const BASE_URL = (import.meta as any)?.env?.VITE_API_BASE_URL || "https://camply.runasp.net";
+const BASE_URL = (import.meta as any)?.env?.VITE_API_BASE_URL || "https://omancamps.com";
 
 export const api = axios.create({
   baseURL: BASE_URL.replace(/\/+$/, ""),

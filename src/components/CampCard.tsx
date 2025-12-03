@@ -98,19 +98,8 @@ const CampCard = ({
             whileHover={{ scale: 1.06 }}
             transition={{ type: "spring", stiffness: 240, damping: 18 }}
           />
-          {/* <button
-            onClick={handleHeartClick}
-            className="absolute top-4 left-4 bg-white/80 hover:bg-white backdrop-blur-sm rounded-full p-2 transition-smooth disabled:opacity-60"
-            aria-label="إضافة إلى السلة"
-            type="button"
-            disabled={heartBusy}
-          >
-            <Heart
-              className={`w-5 h-5 ${isFavorite ? "fill-red-500 text-red-500" : "text-foreground"} ${heartBusy ? "opacity-70" : ""}`}
-            />
-          </button> */}
 
-          <button
+          {/* <button
   onClick={handleHeartClick}
   className="absolute top-4 left-4 p-0 bg-transparent hover:bg-transparent transition-smooth"
   aria-label="إضافة إلى السلة"
@@ -118,7 +107,7 @@ const CampCard = ({
   disabled={heartBusy}
 >
   <Heart className={`w-5 h-5 text-red-500 fill-red-500 ${heartBusy ? "opacity-70" : ""}`} />
-</button>
+</button> */}
 
           <div className="absolute top-4 right-4 bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium">
             {formatUSD(safePrice)} / الليلة
