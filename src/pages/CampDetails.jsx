@@ -287,6 +287,7 @@ export default function CampDetails() {
       try {
         setLoading(true);
         setError(null);
+        debugger
         const res = await api.get(`/api/Camp/${id}/details`);
         if (!alive) return;
         setDetails(res.data);
@@ -447,7 +448,7 @@ export default function CampDetails() {
         console.warn("addItemToBasket failed:", basketErr);
       }
 
-      const phoneLocal = "01559434566";
+      const phoneLocal = "01559084224";
       const phoneIntl = phoneLocal.startsWith("0") ? `20${phoneLocal.slice(1)}` : phoneLocal;
       const msgLines = [
         "مرحباً، أود تأكيد حجز المخيم التالي:",
@@ -471,6 +472,110 @@ export default function CampDetails() {
     } finally {
       setBookingBusy(false);
     }
+
+
+//     setBookingBusy(true);
+// try {
+//   debugger;
+//   const payload = {
+//     campId,
+//     customerName: customerName || undefined,
+//     customerEmail: undefined,
+//     customerPhone: customerPhone || undefined,
+//     startDate: new Date(startDate).toISOString(),
+//     endDate: new Date(endDate).toISOString(),
+//     guests: Number(guests),
+//     notes: notes || undefined,
+//   };
+
+//   const { data } = await api.post("/api/Booking", payload);
+//   console.log(data);
+
+//   try {
+//     await addItemToBasket({
+//       campId,
+//       title: title || "مخيم",
+//       pictureUrl: images?.[0] || FALLBACK,
+//       price: Number(currentPrice || 0),
+//       currency: "USD",
+//       nights: dateDiffNights,
+//       units: 1,
+//     });
+//   } catch (basketErr) {
+//     console.warn("addItemToBasket failed:", basketErr);
+//   }
+
+//   // ---------------------------------------------
+//   // 🔥 إضافة كود الدولة حسب اختيار المستخدم
+//   // ---------------------------------------------
+
+//   const countryCodes = {
+//     "عمان": "968",
+//     "البحرين": "973",
+//     "الكويت": "965",
+//     "قطر": "974",
+//     "السعودية": "966",
+//     "الإمارات العربية المتحدة": "971",
+//     "مصر": "20",
+//     "الأردن": "962",
+//     "الجزائر": "213",
+//     "المغرب": "212",
+//     "تونس": "216",
+//   };
+
+//   // اختر كود الدولة — default مصر لو undefined
+//   const countryCode = countryCodes[selectedCountry] || "20";
+
+//   // رقم الواتساب المحلي (رقم المخيم)
+//   const phoneLocal = "01559084224";
+
+//   // تنظيف الرقم من صفر البداية
+//   const cleaned = phoneLocal.replace(/^0+/, "");
+
+//   // تكوين رقم دولي بالكامل
+//   const phoneIntl = `${countryCode}${cleaned}`;
+
+//   // ---------------------------------------------
+//   // 🔥 الرسالة
+//   // ---------------------------------------------
+//   const msgLines = [
+//     "مرحباً، أود تأكيد حجز المخيم التالي:",
+//     `• المخيم: ${title || "-"}`,
+//     `• الخيار: ${currentLabel}`,
+//     `• السعر/ليلة: ${formatUSD(currentPrice)}`,
+//     `• التواريخ: ${startDate} → ${endDate} (عدد الليالي: ${dateDiffNights})`,
+//     `• الضيوف: ${guests}`,
+//     customerName ? `• الاسم: ${customerName}` : null,
+//     customerPhone ? `• الهاتف: ${customerPhone}` : null,
+//     notes ? `• ملاحظات: ${notes}` : null,
+//     `• رابط التفاصيل: ${window.location.href}`,
+//     data?.id ? `• رقم الحجز: ${data.id}` : null,
+//   ].filter(Boolean);
+
+//   const text = encodeURIComponent(msgLines.join("\n"));
+
+//   // ---------------------------------------------
+//   // 🔥 فتح الواتساب
+//   // ---------------------------------------------
+//   window.location.href = `https://wa.me/${phoneIntl}?text=${text}`;
+
+// } catch (e) {
+//   const serverErrors = e?.response?.data?.errors
+//     ? Object.values(e.response.data.errors).flat().join(" | ")
+//     : null;
+
+//   const msg =
+//     e?.response?.data?.message ||
+//     serverErrors ||
+//     e?.message ||
+//     "تعذر إنشاء الحجز. حاول مرة أخرى.";
+
+//   setBookingError(String(msg));
+
+// } finally {
+//   setBookingBusy(false);
+// }
+
   }
 
   if (loading) {

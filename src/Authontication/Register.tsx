@@ -4,11 +4,26 @@ import { useNavigate, Link } from "react-router-dom";
 import { User, Mail, Eye, EyeOff, Loader2, Tent } from "lucide-react";
 import axios from "axios";
 
+const countries = [
+  { name: "عُمان", code: "+968" },
+  { name: "البحرين", code: "+973" },
+  { name: "الكويت", code: "+965" },
+  { name: "قطر", code: "+974" },
+  { name: "السعودية", code: "+966" },
+  { name: "الإمارات", code: "+971" },
+  { name: "مصر", code: "+20" },
+  { name: "الأردن", code: "+962" },
+  { name: "الجزائر", code: "+213" },
+  { name: "المغرب", code: "+212" },
+  { name: "تونس", code: "+216" },
+];
+
 const Register = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [countryCode, setCountryCode] = useState("+968");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -19,7 +34,7 @@ const Register = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   // ✅ حدد هنا الـ baseUrl للـ backend
-  const baseUrl = "https://omancamps.com/api/Account";
+  const baseUrl = "https://omancamps.com";
 
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
@@ -41,6 +56,7 @@ const Register = () => {
     if (!validateForm()) return;
     setLoading(true);
     try {
+      debugger
       const [firstName, ...lastParts] = formData.fullName.trim().split(" ");
       const displayName = formData.fullName.trim();
       const userName = firstName.toLowerCase();
@@ -48,12 +64,12 @@ const Register = () => {
         displayName,
         userName,
         email: formData.email,
-        phoneNumber: formData.phoneNumber || "0000000000",
+        phoneNumber: formData.phoneNumber ? `${countryCode}${formData.phoneNumber}` : "0000000000",
         password: formData.password,
       };
 
       // ✅ استدعاء الـ API مباشرة
-      const response = await axios.post(`${baseUrl}/register`, registerData);
+      const response = await axios.post(`${baseUrl}/api/Account/register`, registerData);
       console.log("Register response:", response.data);
 
       // الانتقال لصفحة تأكيد الإيميل
@@ -123,13 +139,27 @@ const Register = () => {
             {/* رقم الهاتف */}
             <div>
               <label className="block text-sm font-medium text-white mb-2">رقم الهاتف</label>
-              <input
-                type="text"
-                value={formData.phoneNumber}
-                onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                placeholder="أدخل رقم هاتفك"
-                className="w-full py-3 px-4 bg-[#192127] text-white border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2be178]"
-              />
+              <div className="flex gap-2">
+                <select
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
+                  className="w-[35%] py-3 px-2 bg-[#192127] text-white border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2be178]"
+                  style={{ direction: "ltr" }}
+                >
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.name} ({country.code})
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  value={formData.phoneNumber}
+                  onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                  placeholder="أدخل رقم هاتفك"
+                  className="w-[65%] py-3 px-4 bg-[#192127] text-white border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2be178]"
+                />
+              </div>
             </div>
 
             {/* كلمة المرور */}
